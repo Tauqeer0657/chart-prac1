@@ -1,11 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const db = require("./db");
+const cors = require("cors");
 const app = express();
 
 const port = process.env.PORT || 3306; 
 
 app.use(express.json());
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+
 
 app.get('/api/data', (req, res) => {
     const sql = 'SELECT TIME_LOG, PRED_SI_PER, O2_ENRICHMENT, PCI, RAFT FROM T_REALTIME_ANALYSIS_MYSQL';
